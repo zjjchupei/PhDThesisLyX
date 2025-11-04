@@ -261,10 +261,8 @@ drop fyear time_index
 rename fyear_expanded fyear
 
 * 合并完整的变量信息
-merge m:1 gvkey fyear using `master_data', ///
-    keep(3) nogen ///
-    keepusing(cto_event size xrd_at q roa cash leverage MtB dividends ///
-             liquiR Pastprof quick_ratio rd_sale Inv Capx deltaTA CapxXrd Itotal Inew)
+* 注意：如果您的数据中没有某些变量，请删除keepusing选项或调整变量列表
+merge m:1 gvkey fyear using `master_data', keep(3) nogen
 
 * 生成DID变量
 bys gvkey: egen treat = max(is_treatment)
